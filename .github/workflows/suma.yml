@@ -16,6 +16,21 @@ jobs:
           npm install jest
           npm test
           npm run build
+      - uses: verdaccio/github-actions/canary@master
+        with:
+          message: 'Thanks for your PR, we have promoted your PR and created a canary version of your proposal:'
+          is-global: true
+          package-name: '@verdaccio/ui-theme'
+          registry: 'https://registry.verdaccio.org'
+          bot-token: ${{ secrets.VERDACCIO_BOT_TOKEN }}
+          bot-name: verdacciobot
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.verdaccio.org'
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
   cd:
     needs: ci-to-master
     runs-on: ubuntu-latest
@@ -28,5 +43,3 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           echo "deploy to pdn"
-      - name: Publish with Verdaccio
-        uses: verdaccio/github-actions/publish@master
