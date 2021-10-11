@@ -16,7 +16,7 @@ jobs:
       run: |
         npm ci --ignore-scripts
         ls
-        echo NODE_AUTH_TOKEN
+        echo ${{secrets.NPM_TOKEN}}
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         
