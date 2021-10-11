@@ -16,3 +16,17 @@ jobs:
           npm install jest
           npm test
           npm run build
+  cd:
+    needs: ci-to-master
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: validation-for-pdn
+        env:
+          eventname: ${{ github.event_name }}
+
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "deploy to pdn"
+      - name: Publish with Verdaccio
+        uses: verdaccio/github-actions/publish@master
