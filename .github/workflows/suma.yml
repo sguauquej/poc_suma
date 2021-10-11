@@ -17,7 +17,7 @@ jobs:
         npm ci --ignore-scripts
         ls
         echo ${{secrets.NPM_TOKEN}}
-        nano .npmrc
+        echo .npmrc
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         
