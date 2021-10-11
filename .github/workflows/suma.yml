@@ -17,4 +17,4 @@ jobs:
     - name: Publish dependencies on Verdaccio
       run: npm publish
       env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        NODE_AUTH_TOKEN: ${{secrets.VERDACCIO_TOKEN}}
